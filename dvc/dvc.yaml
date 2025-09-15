@@ -1,0 +1,26 @@
+stages:
+  ingest:
+    cmd: python mlops/dvc/data_ingestion.py mlops/dvc/spam.csv mlops/dvc/corrected.csv
+    deps:
+      - mlops/dvc/data_ingestion.py
+      - mlops/dvc/spam.csv
+    outs:
+      - mlops/dvc/corrected.csv
+
+  preprocess:
+    cmd: python mlops/dvc/data_preprocessing.py mlops/dvc/corrected.csv mlops/dvc/cleaned.csv
+    deps:
+      - mlops/dvc/data_preprocessing.py
+      - mlops/dvc/corrected.csv
+    outs:
+      - mlops/dvc/cleaned.csv
+
+  train:
+    cmd: python mlops/dvc/data_train.py mlops/dvc/cleaned.csv model.pkl params.yaml
+    deps:
+      - mlops/dvc/data_train.py
+      - mlops/dvc/cleaned.csv
+      - params.yaml
+    outs:
+      - model.pkl
+
