@@ -10,6 +10,10 @@ def train_model(data_path, model_path, params_path):
     params = yaml.safe_load(open(params_path))["train"]
     df = pd.read_csv(data_path)
 
+    # ✅ Drop rows where Message is missing
+    df = df.dropna(subset=["Message"])
+    df["Message"] = df["Message"].astype(str)  # ensure all are strings
+
     X = df["Message"]
     y = df["Category"]
 
@@ -28,8 +32,9 @@ def train_model(data_path, model_path, params_path):
 
     print(f"Model saved to {model_path}")
 
+
 if __name__ == "__main__":
-    data_path = "mlops/dvc/cleaned.csv"     # e.g., data/clean.csv
-    model_path = 'model.pkl'    # e.g., model.pkl
-    params_path = 'params.yaml'   # e.g., params.yaml
+    data_path = r"C:\Users\SARTHAK\Desktop\mlops\mlops\dvc\cleaned.csv"      # e.g., data/clean.csv
+    model_path = r"C:\Users\SARTHAK\Desktop\mlops\mlops\dvc\model.pkl"    # e.g., model.pkl
+    params_path = r"C:\Users\SARTHAK\Desktop\mlops\mlops\dvc\param.yaml"   # e.g., params.yaml
     train_model(data_path, model_path, params_path)

@@ -1,0 +1,54 @@
+schema: '2.0'
+stages:
+  ingest:
+    cmd: python data_ingestion.py spam.csv corrected.csv
+    deps:
+    - path: data_ingestion.py
+      hash: md5
+      md5: 5daa61d4ebd2e83625c37b804146023b
+      size: 509
+    - path: spam.csv
+      hash: md5
+      md5: 4566fe81ccd7961063e393a99e8ec2f1
+      size: 480130
+    outs:
+    - path: corrected.csv
+      hash: md5
+      md5: 91a883ff110bcc0f124c54ffb30bff1d
+      size: 442814
+  preprocess:
+    cmd: python data_preprocessing.py corrected.csv cleaned.csv
+    deps:
+    - path: corrected.csv
+      hash: md5
+      md5: 91a883ff110bcc0f124c54ffb30bff1d
+      size: 442814
+    - path: data_preprocessing.py
+      hash: md5
+      md5: 976c13bf95e19ffc36e6ebd8eb50f5ec
+      size: 1010
+    outs:
+    - path: cleaned.csv
+      hash: md5
+      md5: a4e40f1c19617057f879166099e3d325
+      size: 264829
+  train:
+    cmd: python data_train.py cleaned.csv model.pkl param.yaml
+    deps:
+    - path: cleaned.csv
+      hash: md5
+      md5: a4e40f1c19617057f879166099e3d325
+      size: 264829
+    - path: data_train.py
+      hash: md5
+      md5: 9987a6542702a36d39fbf5c0f565aa59
+      size: 1450
+    - path: param.yaml
+      hash: md5
+      md5: d98af81575af5e3a423ac67823fcbd32
+      size: 65
+    outs:
+    - path: model.pkl
+      hash: md5
+      md5: 8b0fe8f16d7abe302be5549190fd8127
+      size: 320124

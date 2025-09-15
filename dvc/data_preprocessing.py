@@ -22,6 +22,6 @@ def preprocess_data(input_path, output_path):
     print(f"Preprocessed data saved to {output_path}")
 
 if __name__ == "__main__":
-    input_path = "mlops/dvc/corrected.csv"    # e.g., data/processed.csv
-    output_path = "mlops/dvc/cleaned.csv"   # e.g., data/clean.csv
+    input_path = r"C:\Users\SARTHAK\Desktop\mlops\mlops\dvc\corrected.csv"    # e.g., data/processed.csv
+    output_path = r"C:\Users\SARTHAK\Desktop\mlops\mlops\dvc\cleaned.csv"   # e.g., data/clean.csv
     preprocess_data(input_path, output_path)

@@ -1,26 +1,26 @@
 stages:
   ingest:
-    cmd: python mlops/dvc/data_ingestion.py mlops/dvc/spam.csv mlops/dvc/corrected.csv
+    cmd: python data_ingestion.py spam.csv corrected.csv
     deps:
-      - mlops/dvc/data_ingestion.py
-      - mlops/dvc/spam.csv
+      - data_ingestion.py
+      - spam.csv
     outs:
-      - mlops/dvc/corrected.csv
+      - corrected.csv
 
   preprocess:
-    cmd: python mlops/dvc/data_preprocessing.py mlops/dvc/corrected.csv mlops/dvc/cleaned.csv
+    cmd: python data_preprocessing.py corrected.csv cleaned.csv
     deps:
-      - mlops/dvc/data_preprocessing.py
-      - mlops/dvc/corrected.csv
+      - data_preprocessing.py
+      - corrected.csv
     outs:
-      - mlops/dvc/cleaned.csv
+      - cleaned.csv
 
   train:
-    cmd: python mlops/dvc/data_train.py mlops/dvc/cleaned.csv model.pkl params.yaml
+    cmd: python data_train.py cleaned.csv model.pkl param.yaml
     deps:
-      - mlops/dvc/data_train.py
-      - mlops/dvc/cleaned.csv
-      - params.yaml
+      - data_train.py
+      - cleaned.csv
+      - param.yaml
     outs:
       - model.pkl
 
